@@ -82,12 +82,12 @@ const Lab5 = (app) => {
     });
     app.get("/a5/multiply/:a/:b", (req, res) => {
         const { a, b } = req.params;
-        const sum = parseInt(a) - parseInt(b);
+        const sum = parseInt(a) * parseInt(b);
         res.send(sum.toString());
     });
     app.get("/a5/divide/:a/:b", (req, res) => {
         const { a, b } = req.params;
-        const sum = parseInt(a) - parseInt(b);
+        const sum = parseInt(a) / parseInt(b);
         res.send(sum.toString());
     });
     app.get("/a5/calculator", (req, res) => {
