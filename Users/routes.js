@@ -2,8 +2,20 @@ import * as dao from "./dao.js";
 
 export default function UserRoutes(app) {
   const createUser = async (req, res) => {
-    const user = await dao.createUser(req.body);
-    res.json(user);
+    const { username, password } = req.body;
+    if (!username || !password) {
+      res.status(400).json(
+        { message: "Please enter a username and password" });
+    } else {
+      const user = await dao.findUserByUsername(req.body.username);
+      if (user) {
+          res.status(400).json(
+            { message: "Username already taken" });
+      } else {
+          const good_user = await dao.createUser(req.body);
+          res.json(good_user);
+        }
+    }
   };
 
   const deleteUser = async (req, res) => {
@@ -28,6 +40,10 @@ export default function UserRoutes(app) {
   };
 
   const signup = async (req, res) => {
+    const {username, password} = req.body;
+    if (!username || !password) {
+      return res.status(400).json({message: "Username and Password is required."});
+    }
     const user = await dao.findUserByUsername(req.body.username);
     if (user) {
       res.status(400).json(
