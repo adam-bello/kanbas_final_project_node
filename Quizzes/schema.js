@@ -15,7 +15,11 @@ const quizSchema = new mongoose.Schema(
       enum: ["Graded Quiz", "Practice Quiz", "Graded Survey", "Ungraded Survey"],
       default: "Graded Quiz",
     },
-    assignmentGroup: String,
+    assignmentGroup: {
+      type: String,
+      enum: ["Quizzes", "Exams", "Assignments", "Project"],
+      default: "Quizzes"
+    },
     shuffle: { type: Boolean, default: true },
     timeLimit: { type: Number, default: 20 },
     multipleAttempts: { type: Boolean, default: false },
@@ -24,6 +28,7 @@ const quizSchema = new mongoose.Schema(
     oneQuestionATime: { type: Boolean, default: true },
     webcamRequired: { type: Boolean, default: false },
     lockQuestions: { type: Boolean, default: false },
+    questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'questions'}]
   },
   { collection: "quizzes" }
 );
