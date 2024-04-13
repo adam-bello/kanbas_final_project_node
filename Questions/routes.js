@@ -37,6 +37,6 @@ export default function QuestionRoutes(app) {
   app.post("/api/questions", createQuestion);
   app.get("/api/questions", findAllQuestions);
   app.get("/api/questions/:questionId", findQuestionById);
-  app.put("/api/questions/:questionId", updateQuiz);
+  app.put("/api/questions/:questionId", updateQuestion);
   app.delete("/api/questions/:questionId", deleteQuestion);
 }
